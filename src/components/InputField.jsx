@@ -1,4 +1,9 @@
-const InputField = ({ value, handleInputChange, handleAddTask }) => {
+const InputField = ({
+  value,
+  handleInputChange,
+  handleAddTask,
+  selectedColor,
+}) => {
   return (
     <div className="w-full flex justify-center p-4">
       <input

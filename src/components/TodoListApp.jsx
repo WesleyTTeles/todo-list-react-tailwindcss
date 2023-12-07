@@ -18,15 +18,24 @@ function TodoListApp() {
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
+  const taskDone = (taskId) => {
+    setTasks(
+      tasks.map((task) =>
+        task.id === taskId ? { ...task, isDone: !task.isDone } : task
+      )
+    );
+  };
+
   return (
     <main className="container mx-auto">
-      <h1 className="text-center text-2xl p-4">Lista de Tarefas</h1>
+      <h1 className="text-center text-2xl p-4 relative">Lista de Tarefas</h1>
+
       <InputField
         value={value}
         handleInputChange={(e) => setValue(e.target.value)}
         handleAddTask={handleAddTask}
       />
-      <ContentTask tasks={tasks} deleteTask={deleteTask} />
+      <ContentTask tasks={tasks} deleteTask={deleteTask} taskDone={taskDone} />
     </main>
   );
 }
