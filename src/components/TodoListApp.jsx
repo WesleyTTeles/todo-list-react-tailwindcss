@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import InputField from "./InputField";
 import ContentTask from "./ContentTask";
@@ -6,11 +6,20 @@ import ContentTask from "./ContentTask";
 function TodoListApp() {
   const [tasks, setTasks] = useState([]);
   const [value, setValue] = useState("");
+  const inputRef = useRef(null);
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleAddTask();
+      inputRef.current.focus();
+    }
+  };
 
   const handleAddTask = () => {
     if (value.trim() !== "") {
       setTasks([...tasks, { id: tasks.length + 1, taskName: value }]);
       setValue("");
+      inputRef.current.focus();
     }
   };
 
@@ -34,6 +43,8 @@ function TodoListApp() {
         value={value}
         handleInputChange={(e) => setValue(e.target.value)}
         handleAddTask={handleAddTask}
+        handleKeyDown={handleKeyDown}
+        inputRef={inputRef}
       />
       <ContentTask tasks={tasks} deleteTask={deleteTask} taskDone={taskDone} />
     </main>

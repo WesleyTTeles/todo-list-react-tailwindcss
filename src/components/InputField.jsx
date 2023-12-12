@@ -2,7 +2,8 @@ const InputField = ({
   value,
   handleInputChange,
   handleAddTask,
-  selectedColor,
+  handleKeyDown,
+  inputRef,
 }) => {
   return (
     <div className="w-full flex justify-center p-4">
@@ -12,6 +13,9 @@ const InputField = ({
         className="border rounded-s-xl p-2 w-96"
         value={value}
         onChange={handleInputChange}
+        onKeyDown={handleKeyDown}
+        ref={inputRef}
+        autoFocus
       />
       <div
         className="bg-blue-950 rounded-e-xl p-2 text-white cursor-pointer"
